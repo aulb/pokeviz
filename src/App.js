@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import ReactHighcharts from 'react-highcharts';
-import { makeHighchartsConfig } from './utils';
-import PokeInputForm from './components/PokeInputForm';
+import { makeHighchartsConfig, isValidPokemonName } from './utils';
+import PokevisList from './components/PokevisList';
+import PokevisInput from './components/PokevisInput';
 
 // TODO: ReactHighcharts wrapper -> RENAME
 class App extends Component {
@@ -10,26 +11,31 @@ class App extends Component {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
-      pokemon: [],
+      pokemonList: [],
     };
   }
 
   onSubmit(event) {
     if (event) event.preventDefault();
-    const { pokemon } = this.state;
 
-    pokemon.push(this.refs.speciesText.value);
-    this.setState({ pokemon });
+    const pokemonName = this.refs.speciesText.value;
+    if (!isValidPokemonName(pokemonName)) return;
+
+    const { pokemonList } = this.state;
+    pokemonList.push(pokemonName);
+    this.setState({ pokemonList });
   }
 
   render() {
+    const { pokemonList } = this.state;
     return (<div>
       <form onSubmit={this.onSubmit}>
         <input ref="speciesText" type="text" />
-        <button>🔎</button>
+        <button><span role="img">🔎</span></button>
       </form>
+      <PokevisList pokemonList={pokemonList} />
       <div className="App">
-        <ReactHighcharts config={makeHighchartsConfig(this.state.pokemon)}></ReactHighcharts>
+        <ReactHighcharts config={makeHighchartsConfig(this.state.pokemonList)}></ReactHighcharts>
       </div>
     </div>);
   }

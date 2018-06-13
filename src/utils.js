@@ -1,5 +1,9 @@
-import { TIER_TO_VALUE, CATEGORIES, BASE_HIGHCHARTS_CONFIG } from './constants';
-import competitive from './competitive';
+import { TIER_TO_VALUE, CATEGORIES, BASE_HIGHCHARTS_CONFIG } from './constants/constants';
+import competitive from './constants/competitive';
+
+const validPokemonNames = new Set(Object.keys(competitive));
+
+export const isValidPokemonName = pokemonName => validPokemonNames.has(pokemonName);
 
 const getPokemonSeries = (name) => {
   const pokemon = competitive[name];

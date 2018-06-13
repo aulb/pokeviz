@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-class PokeInputForm extends Component {
+class PokevisInput extends Component {
   constructor() {
     super();
     this.onSubmit = this.onSubmit.bind(this);
@@ -21,4 +22,8 @@ class PokeInputForm extends Component {
   }
 }
 
-export default PokeInputForm;
+PokevisInput.propTypes = {
+  onPokemonAdd: PropTypes.func
+};
+
+export default PokevisInput;
