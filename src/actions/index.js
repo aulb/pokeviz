@@ -5,10 +5,10 @@ const createAction = (pokemonName, type) => ({
   type
 });
 
-export const addToPokemonList = pokemonName => ({
-  dispatch(createAction(pokemonName, types.ADD_TO_POKEMON_LIST));
-});
+export const addToPokemonList = pokemonName => {
+	return dispatch => dispatch(createAction(pokemonName, types.ADD_TO_POKEMON_LIST));
+};
 
-export const deleteFromPokemonList = pokemonName => ({
-  dispatch(createAction(pokemonName, types.DELETE_FROM_POKEMON_LST));
-});
+export const deleteFromPokemonList = pokemonName => {
+	return dispatch => dispatch(createAction(pokemonName, types.DELETE_FROM_POKEMON_LIST));
+};

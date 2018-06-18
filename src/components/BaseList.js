@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class PokevisList extends Component {
+class BaseList extends Component {
   constructor(props) {
     super(props);
-
     this.makeRow = this.makeRow.bind(this);
   }
 
   makeRow() {
     const { pokemonList } = this.props;
+
+    // TODO: temp
+    if (!pokemonList || !pokemonList.map) {
+      return null;
+    }
+    
     return pokemonList.map(pokemonName => <td key={pokemonName}>{pokemonName}</td>);
   }
 
@@ -28,9 +33,9 @@ class PokevisList extends Component {
   }
 }
 
-PokevisList.propTypes = {
-  pokemonList: PropTypes.array,
-  onPokemonDelete: PropTypes.func
+BaseList.propTypes = {
+  pokemonList: PropTypes.object,
+  deletePokemon: PropTypes.func
 };
 
-export default PokevisList;
+export default BaseList;

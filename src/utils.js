@@ -38,17 +38,21 @@ const makeSeries = (name, form) => {
   }
 };
 
-export const makeHighchartsConfig = (pokemon_list) => {
+export const makeHighchartsConfig = (pokemonList) => {
   let series = [];
 
-  for (let i = 0; i < pokemon_list.length; i++) {
-    let pokemon = pokemon_list[i];
-    if (pokemon in competitive) {
-      series.push(...getPokemonSeries(pokemon));
-    }
+  if (pokemonList) {
+    for (let i = 0; i < pokemonList.length; i++) {
+      let pokemon = pokemonList[i];
+      if (pokemon in competitive) {
+        series.push(...getPokemonSeries(pokemon));
+      }
+    }    
   }
 
-  BASE_HIGHCHARTS_CONFIG['series'] = series;
+  if (series.length) {
+    BASE_HIGHCHARTS_CONFIG['series'] = series;
+  }
   return BASE_HIGHCHARTS_CONFIG;
 };
 

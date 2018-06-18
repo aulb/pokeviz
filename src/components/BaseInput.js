@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class PokevisInput extends Component {
+class BaseInput extends Component {
   constructor() {
     super();
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit(event) {
-    if (event) event.preventDefault();
-    console.log(this.refs.speciesText.value);
+    if (event) {
+      event.preventDefault();
+    }
+    const { addPokemon } = this.props;
+    const pokemonName = this.refs.speciesText.value;
+    addPokemon(pokemonName);
   }
 
   render() {
@@ -22,8 +26,8 @@ class PokevisInput extends Component {
   }
 }
 
-PokevisInput.propTypes = {
-  onPokemonAdd: PropTypes.func
+BaseInput.propTypes = {
+  addPokemon: PropTypes.func
 };
 
-export default PokevisInput;
+export default BaseInput;
