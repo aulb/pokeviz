@@ -20,7 +20,7 @@ class BaseInput extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <input ref="speciesText" type="text" />
-        <button>🔎</button>
+        <button><span role="img" aria-label="find">🔎</span></button>
       </form>
     );
   }

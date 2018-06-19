@@ -10,6 +10,14 @@ class BaseContainer extends Component {
     super(props);
     this.addPokemon = this.addPokemon.bind(this);
     this.deletePokemon = this.deletePokemon.bind(this);
+    this.setNewPokemon = this.setNewPokemon.bind(this);
+    this.pokemonList = this.props.pokemonList;
+  }
+
+  setNewPokemon() {
+    this.setState({
+      pokemonList: this.props.pokemonList
+    });
   }
 
   addPokemon(pokemonName) {
@@ -17,11 +25,13 @@ class BaseContainer extends Component {
     if (isValidPokemonName(pokemonName)) {
       addToPokemonList(pokemonName);
     }
+    this.setNewPokemon();
   }
 
   deletePokemon(pokemonName) {
     const { deleteFromPokemonList } = this.props;
     deleteFromPokemonList(pokemonName);
+    this.setNewPokemon();
   }
 
   render() {
@@ -38,7 +48,7 @@ class BaseContainer extends Component {
 BaseContainer.propTypes = {
   pokemonList: PropTypes.object,
   addToPokemonList: PropTypes.func,
-  addToPokemonList: PropTypes.func
+  deleteFromPokemonList: PropTypes.func
 };
 
 export default BaseContainer;

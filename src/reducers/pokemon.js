@@ -9,16 +9,19 @@ const initialState = {
 
 const pokemon = (state = initialState, action) => {
   const { pokemonList } = state;
-  switch (action.type) {
+  const { type, pokemonName } = action;
+  switch (type) {
     case ADD_TO_POKEMON_LIST:
-      pokemonList.add(action.pokemonName);      
-      return { pokemonList };
+      pokemonList.add(pokemonName);      
+      break;
     case DELETE_FROM_POKEMON_LIST:
-      pokemonList.delete(action.pokemonName);
-      return { pokemonList };
+      pokemonList.delete(pokemonName);
+      break;
     default:
-      return state;
+      break;
   }
+  state.pokemonList = pokemonList;
+  return state;
 }
 
 export default pokemon;

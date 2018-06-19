@@ -1,9 +1,17 @@
-import { TIER_TO_VALUE, CATEGORIES, BASE_HIGHCHARTS_CONFIG } from './constants/constants';
+import _ from 'lodash';
+import {
+  TIER_TO_VALUE,
+  CATEGORIES,
+  BASE_HIGHCHARTS_CONFIG
+} from './constants/constants';
 import competitive from './constants/competitive';
 
-const validPokemonNames = new Set(Object.keys(competitive));
-
-export const isValidPokemonName = pokemonName => validPokemonNames.has(pokemonName);
+// TODO: revamp
+const competitiveData = Object.keys(competitive);
+const validPokemonNames = new Set(competitiveData.map(pokemonName => pokemonName.toLowerCase()));
+export const isValidPokemonName = pokemonName => {
+  return validPokemonNames.has(pokemonName.toLowerCase());
+};
 
 const getPokemonSeries = (name) => {
   const pokemon = competitive[name];
@@ -39,21 +47,21 @@ const makeSeries = (name, form) => {
 };
 
 export const makeHighchartsConfig = (pokemonList) => {
+  let uniqueConfig = _.cloneDeep(BASE_HIGHCHARTS_CONFIG);
   let series = [];
 
   if (pokemonList) {
-    for (let i = 0; i < pokemonList.length; i++) {
-      let pokemon = pokemonList[i];
-      if (pokemon in competitive) {
-        series.push(...getPokemonSeries(pokemon));
+    pokemonList.forEach(pokemonName => {
+      if (pokemonName in competitive) {
+        series.push(...getPokemonSeries(pokemonName));
       }
-    }    
+    });
   }
 
   if (series.length) {
-    BASE_HIGHCHARTS_CONFIG['series'] = series;
+    uniqueConfig['series'] = series;
   }
-  return BASE_HIGHCHARTS_CONFIG;
+  return uniqueConfig;
 };
 
-const getLineColor = () => null;
+// TODO: const getLineColor = () => null;
