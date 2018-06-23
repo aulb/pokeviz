@@ -13,16 +13,15 @@ class BaseInput extends Component {
     }
     const { addPokemon } = this.props;
     const pokemonName = this.refs.speciesText.value;
+    this.form.reset();
     addPokemon(pokemonName);
   }
 
   render() {
-    return (
-      <form onSubmit={this.onSubmit}>
-        <input ref="speciesText" type="text" />
-        <button><span role="img" aria-label="find">🔎</span></button>
-      </form>
-    );
+    return (<form ref={el => this.form = el} onSubmit={this.onSubmit}>
+      <input ref="speciesText" type="text" />
+      <button><span role="img" aria-label="find">🔎</span></button>
+    </form>);
   }
 }
 

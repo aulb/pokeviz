@@ -1,4 +1,4 @@
-const VALUE_TO_TIER = {
+export const VALUE_TO_TIER = {
   0: 'PU',
   0.5: 'PUBL',
   1: 'NU',
@@ -12,21 +12,7 @@ const VALUE_TO_TIER = {
   6: 'AG'
 };
 
-const TIER_TO_VALUE = {
-  'PU': 0,
-  'PUBL': 0.5,
-  'NU': 1,
-  'NUBL': 1.5,
-  'RU': 2,
-  'RUBL': 2.5,
-  'UU': 3,
-  'UUBL': 3.5,
-  'OU': 4,
-  'Uber': 5,
-  'AG': 6
-};
-
-const GENERATIONS = {
+export const GENERATIONS = {
   1: 'RGBY',
   2: 'GSC',
   3: 'RS',
@@ -41,8 +27,8 @@ const GENERATIONS = {
   7.5: 'USUM'
 };
 
-const CATEGORIES = ['RB', 'GS', 'RS', 'DP', 'BW', 'XY', 'SM'];
-const BASE_HIGHCHARTS_CONFIG = {
+export const CATEGORIES = ['RB', 'GS', 'RS', 'DP', 'BW', 'XY', 'SM'];
+export const BASE_HIGHCHARTS_CONFIG = {
   chart: {
     renderTo: 'container',
     type: 'line'
@@ -68,10 +54,4 @@ const BASE_HIGHCHARTS_CONFIG = {
   }
 };
 
-module.exports = {
-  TIER_TO_VALUE,
-  VALUE_TO_TIER,
-  GENERATIONS,
-  CATEGORIES,
-  BASE_HIGHCHARTS_CONFIG
-};
+export const DEFAULT_POKEMON = 'Starmie';

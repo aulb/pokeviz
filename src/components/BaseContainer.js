@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactHighcharts from 'react-highcharts';
-import BaseList from './BaseList';
-import BaseInput from './BaseInput';
+import SearchRow from './SearchRow';
+import GraphRow from './GraphRow';
 import { makeHighchartsConfig, isValidPokemonName } from '../utils';
 
 class BaseContainer extends Component {
@@ -11,7 +10,9 @@ class BaseContainer extends Component {
     this.addPokemon = this.addPokemon.bind(this);
     this.deletePokemon = this.deletePokemon.bind(this);
     this.setNewPokemon = this.setNewPokemon.bind(this);
-    this.pokemonList = this.props.pokemonList;
+    this.state = {
+      pokemonList: this.props.pokemonList
+    };
   }
 
   setNewPokemon() {
@@ -35,12 +36,17 @@ class BaseContainer extends Component {
   }
 
   render() {
-  	const { pokemonList } = this.props;
+  	const { pokemonList } = this.state;
   	const highChartsConfig = makeHighchartsConfig(pokemonList);
-    return <div>
-      <BaseInput addPokemon={this.addPokemon} />
-      <BaseList deletePokemon={this.deletePokemon} pokemonList={pokemonList} />
-      <ReactHighcharts config={highChartsConfig}></ReactHighcharts>
+    return <div className="container">
+      <SearchRow
+        addPokemon={this.addPokemon}
+      />
+      <GraphRow
+        pokemonList={pokemonList}
+        deletePokemon={this.deletePokemon}
+        graphConfig={highChartsConfig}
+      />        
     </div>;
   }
 }

@@ -1,4 +1,4 @@
-import * as types from '../constants/PokevisActionTypes';
+import * as types from '../constants/PokevisActions';
 
 const createAction = (pokemonName, type) => ({
   pokemonName,

@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import {
-  TIER_TO_VALUE,
+  VALUE_TO_TIER,
   CATEGORIES,
   BASE_HIGHCHARTS_CONFIG
-} from './constants/constants';
+} from './constants';
 import competitive from './constants/competitive';
 
 // TODO: revamp
@@ -25,15 +25,21 @@ const getHighestTier = (tiers) => {
   return 'LC';
 };
 
+const tierToValue = _.invert(VALUE_TO_TIER);
+
 const extractFormatValues = (formats) => {
   return CATEGORIES.map(generation => {
+    if (!formats) {
+      return null;
+    }
+    
     const currentGenerationTiers = formats[generation];
     if (currentGenerationTiers) {
       return getHighestTier(currentGenerationTiers);
     }
 
     return null;
-  }).map(tier => tier in TIER_TO_VALUE ? TIER_TO_VALUE[tier] : null);
+  }).map(tier => tier in tierToValue ? parseInt(tierToValue[tier], 10) : null);
 };
 
 const makeSeries = (name, form) => {
@@ -64,4 +70,4 @@ export const makeHighchartsConfig = (pokemonList) => {
   return uniqueConfig;
 };
 
-// TODO: const getLineColor = () => null;
+export const getLineColor = (primaryType, secondaryType) => null;

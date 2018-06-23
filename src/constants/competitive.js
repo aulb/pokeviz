@@ -18495,7 +18495,7 @@ export default {
    ],
    "formats": {
     "SM": [
-     "Uber"
+     "RU"
     ]
    }
   },
@@ -18515,7 +18515,12 @@ export default {
    ],
    "abilities": [
     "Prism Armor"
-   ]
+   ],
+   "formats": {
+    "SM": [
+     "Uber"
+    ]
+   }
   },
   {
    "suffix": "Ultra",
@@ -18556,7 +18561,12 @@ export default {
    ],
    "abilities": [
     "Prism Armor"
-   ]
+   ],
+   "formats": {
+    "SM": [
+     "Uber"
+    ]
+   }
   }
  ],
  "Nidoking": [

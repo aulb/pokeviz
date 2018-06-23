@@ -1,5 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import lookup from '../constants/lookup';
+
+const BaseRow = (pokemonName, onClickHandler) => {
+  const _pokemonName = pokemonName.toLowerCase();
+  const { sprite } = lookup[_pokemonName];
+
+  /* Old solution */
+  // https://github.com/facebook/create-react-app/issues/585
+  // const _spriteSource = require(`../assets/sprites/${sprite}.png`);
+
+  // https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-the-public-folder
+  const spriteSource = `${process.env.PUBLIC_URL}/assets/sprites/${sprite}.png`;
+  return <div
+    key={pokemonName}
+    data-name={pokemonName}
+    onClick={onClickHandler}>
+      <img src={spriteSource}/>{pokemonName}
+  </div>;
+};
 
 class BaseList extends Component {
   constructor(props) {
@@ -15,12 +34,7 @@ class BaseList extends Component {
   }
 
   makeRowElement(pokemonName) {
-    const clickable = <div 
-      key={pokemonName} 
-      data-name={pokemonName} 
-      onClick={this.onClick}>
-        {pokemonName}
-    </div>;
+    const clickable = BaseRow(pokemonName, this.onClick);
     return <li>{clickable}</li>;
   }
 
@@ -38,10 +52,9 @@ class BaseList extends Component {
   }
 
   render() {
-    const pokemonList = this.makeRow();
     return (
       <ul>
-        {pokemonList}
+        { this.makeRow() }
       </ul>
     );
   }
