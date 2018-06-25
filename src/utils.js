@@ -89,4 +89,9 @@ export const makeHighchartsConfig = (pokemonList) => {
   return uniqueConfig;
 };
 
+export const getRandomPokemonName = () => {
+  const randomBetween1to802 = Math.floor(Math.random() * 802);
+  return competitiveData[randomBetween1to802];
+};
+
 export const getLineColor = (primaryType, secondaryType) => null;

@@ -94,5 +94,3 @@ export const BASE_HIGHCHARTS_CONFIG = {
     formatter: highchartsTooltip
   }
 };
-
-export const DEFAULT_POKEMON = 'Starmie';

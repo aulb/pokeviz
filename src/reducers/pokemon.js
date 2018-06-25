@@ -2,10 +2,10 @@ import {
   ADD_TO_POKEMON_LIST,
   DELETE_FROM_POKEMON_LIST
 } from '../constants/PokevisActions';
-import { DEFAULT_POKEMON } from '../constants'
+import { getRandomPokemonName } from '../utils'
 
 const initialState = {
-  pokemonList: new Set([DEFAULT_POKEMON])
+  pokemonList: new Set([getRandomPokemonName()])
 };
 
 const pokemon = (state = initialState, action) => {
