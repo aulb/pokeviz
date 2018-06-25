@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SearchRow from './SearchRow';
 import GraphRow from './GraphRow';
+import Header from './Header';
 import { makeHighchartsConfig, isValidPokemonName } from '../utils';
 
 class BaseContainer extends Component {
@@ -39,6 +40,7 @@ class BaseContainer extends Component {
   	const { pokemonList } = this.state;
   	const highChartsConfig = makeHighchartsConfig(pokemonList);
     return <div className="container">
+      <Header title={'Meta Snapshot'} />
       <SearchRow
         addPokemon={this.addPokemon}
       />

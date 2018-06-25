@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import lookup from '../constants/lookup';
+import { getSprite } from '../utils';
 
 const BaseRow = (pokemonName, onClickHandler) => {
-  const _pokemonName = pokemonName.toLowerCase();
-  const { sprite } = lookup[_pokemonName];
-
-  /* Old solution */
-  // https://github.com/facebook/create-react-app/issues/585
-  // const _spriteSource = require(`../assets/sprites/${sprite}.png`);
-
-  // https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-the-public-folder
-  const spriteSource = `${process.env.PUBLIC_URL}/assets/sprites/${sprite}.png`;
+  const spriteSource = getSprite(pokemonName);
   return <div
     key={pokemonName}
     data-name={pokemonName}
     onClick={onClickHandler}>
-      <img src={spriteSource}/>{pokemonName}
+      <img className="spritePic" src={spriteSource}/>
+      {pokemonName}
   </div>;
 };
 

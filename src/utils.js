@@ -4,7 +4,21 @@ import {
   CATEGORIES,
   BASE_HIGHCHARTS_CONFIG
 } from './constants';
+import lookup from './constants/lookup';
 import competitive from './constants/competitive';
+
+export const getSprite = (pokemonName) => {
+  const _pokemonName = pokemonName.toLowerCase();
+  const { sprite } = lookup[_pokemonName];
+
+  /* Old solution */
+  // https://github.com/facebook/create-react-app/issues/585
+  // const _spriteSource = require(`../assets/sprites/${sprite}.png`);
+
+  // https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-the-public-folder
+  const spriteSource = `${process.env.PUBLIC_URL}/assets/sprites/${sprite}.png`;
+  return spriteSource;
+}
 
 // TODO: revamp
 const competitiveData = Object.keys(competitive);
@@ -45,9 +59,13 @@ const extractFormatValues = (formats) => {
 const makeSeries = (name, form) => {
   const { suffix, formats } = form;
   const dash = suffix === '' ? '' : '-';
+  const spriteName = getSprite(name);
   return {
     name: `${name}${dash}${suffix}`,
-    data: extractFormatValues(formats)
+    data: extractFormatValues(formats),
+    marker: {
+      symbol: `url(${spriteName})`
+    }
     // TODO color: '#FF00FF'
   }
 };

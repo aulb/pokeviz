@@ -19,8 +19,8 @@ class BaseInput extends Component {
 
   render() {
     return (<form ref={el => this.form = el} onSubmit={this.onSubmit}>
-      <input ref="speciesText" type="text" />
-      <button><span role="img" aria-label="find">🔎</span></button>
+      <input id="input" ref="speciesText" type="text" />
+      <button id="search"><span role="img" aria-label="find">🔎</span></button>
     </form>);
   }
 }
