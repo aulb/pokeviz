@@ -20,11 +20,11 @@ export const getSprite = (pokemonName) => {
   return spriteSource;
 }
 
-// TODO: revamp
+// TODO: disabled lowercase pokemon names for now, only exact match
 const competitiveData = Object.keys(competitive);
-const validPokemonNames = new Set(competitiveData.map(pokemonName => pokemonName.toLowerCase()));
+const validPokemonNames = new Set(competitiveData.map(pokemonName => pokemonName));
 export const isValidPokemonName = pokemonName => {
-  return validPokemonNames.has(pokemonName.toLowerCase());
+  return validPokemonNames.has(pokemonName);
 };
 
 const getPokemonSeries = (name) => {
@@ -59,9 +59,10 @@ const extractFormatValues = (formats) => {
 const makeSeries = (name, form) => {
   const { suffix, formats } = form;
   const dash = suffix === '' ? '' : '-';
-  const spriteName = getSprite(name);
+  const fullPokemonName = `${name}${dash}${suffix}`;
+  const spriteName = getSprite(fullPokemonName);
   return {
-    name: `${name}${dash}${suffix}`,
+    name: fullPokemonName,
     data: extractFormatValues(formats),
     marker: {
       symbol: `url(${spriteName})`

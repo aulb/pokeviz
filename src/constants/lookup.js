@@ -2429,6 +2429,11 @@ export default {
   "id": "486",
   "sprite": "486"
  },
+ "giratina": {
+  "speciesId": "487",
+  "id": "487",
+  "sprite": "487"
+ },
  "giratina-altered": {
   "speciesId": "487",
   "id": "487",
@@ -3384,7 +3389,12 @@ export default {
   "id": "677",
   "sprite": "677"
  },
- "meowstic-male": {
+ "meowstic": {
+  "speciesId": "678",
+  "id": "678",
+  "sprite": "678"
+ },
+ "meowstic-m": {
   "speciesId": "678",
   "id": "678",
   "sprite": "678"
@@ -3399,7 +3409,7 @@ export default {
   "id": "680",
   "sprite": "680"
  },
- "aegislash-shield": {
+ "aegislash": {
   "speciesId": "681",
   "id": "681",
   "sprite": "681"
@@ -4154,7 +4164,7 @@ export default {
   "id": "10024",
   "sprite": "647-r"
  },
- "meowstic-female": {
+ "meowstic-f": {
   "speciesId": "678",
   "id": "10025",
   "sprite": "678-f"
@@ -4549,7 +4559,7 @@ export default {
   "id": "10103",
   "sprite": "038-a"
  },
- "diglet-alola": {
+ "diglett-alola": {
   "speciesId": "50",
   "id": "10104",
   "sprite": "050-a"
@@ -4789,12 +4799,12 @@ export default {
   "id": "10151",
   "sprite": "773"
  },
- "necrozma-dusk-mane": {
+ "necrozma-dusk mane": {
   "speciesId": "800",
   "id": "10152",
   "sprite": "800-dm"
  },
- "necrozma-dawn-wings": {
+ "necrozma-dawn wings": {
   "speciesId": "800",
   "id": "10153",
   "sprite": "800-dw"
