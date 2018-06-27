@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getSprite } from '../utils';
+import { getSprite } from '../utils/';
 
 const BaseRow = (pokemonName, onClickHandler) => {
   const spriteSource = getSprite(pokemonName);

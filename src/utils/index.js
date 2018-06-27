@@ -3,9 +3,10 @@ import {
   VALUE_TO_TIER,
   CATEGORIES,
   BASE_HIGHCHARTS_CONFIG
-} from './constants';
-import lookup from './constants/lookup';
-import competitive from './constants/competitive';
+} from '../constants/';
+import lookup from '../constants/lookup';
+import competitive from '../constants/competitive';
+import PrefixTree from './PrefixTree';
 
 export const getSprite = (pokemonName) => {
   const _pokemonName = pokemonName.toLowerCase();
@@ -23,8 +24,18 @@ export const getSprite = (pokemonName) => {
 // TODO: disabled lowercase pokemon names for now, only exact match
 const competitiveData = Object.keys(competitive);
 const validPokemonNames = new Set(competitiveData.map(pokemonName => pokemonName));
+const suggestionLookup = new PrefixTree();
+validPokemonNames.forEach(pokemonName => suggestionLookup.addWord(pokemonName.toLowerCase()));
 export const isValidPokemonName = pokemonName => {
   return validPokemonNames.has(pokemonName);
+};
+
+export const getPokemonNameSuggestions = string => {
+  if (!string) {
+    return [];
+  }
+
+  return suggestionLookup.predictWord(string);
 };
 
 const getPokemonSeries = (name) => {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SearchRow from './SearchRow';
 import GraphRow from './GraphRow';
 import Header from './Header';
-import { makeHighchartsConfig, isValidPokemonName } from '../utils';
+import { makeHighchartsConfig, isValidPokemonName } from '../utils/';
 
 class BaseContainer extends Component {
   constructor(props) {
