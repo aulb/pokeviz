@@ -1,14 +1,18 @@
 import _ from 'lodash';
 import {
-  VALUE_TO_TIER,
-  CATEGORIES,
-  BASE_HIGHCHARTS_CONFIG
+  tierToValue,
+  categories,
+  baseHighchartsConfig
 } from '../constants/';
 import lookup from '../constants/lookup';
 import competitive from '../constants/competitive';
 import PrefixTree from './PrefixTree';
 
-export const getSprite = (pokemonName) => {
+/*
+ * Get the sprite source given Pokemon name.
+ * 'Pikachu' => '/usr/Pokevis/025.png'
+ */
+export const getSprite = pokemonName => {
   const _pokemonName = pokemonName.toLowerCase();
   const { sprite } = lookup[_pokemonName];
 
@@ -30,6 +34,9 @@ export const isValidPokemonName = pokemonName => {
   return validPokemonNames.has(pokemonName);
 };
 
+/*
+ * Given a string, find the closest match Pokemon names.
+ */
 export const getPokemonNameSuggestions = string => {
   if (!string) {
     return [];
@@ -50,10 +57,9 @@ const getHighestTier = (tiers) => {
   return 'LC';
 };
 
-const tierToValue = _.invert(VALUE_TO_TIER);
 
 const extractFormatValues = (formats) => {
-  return CATEGORIES.map(generation => {
+  return categories.map(generation => {
     if (!formats) {
       return null;
     }
@@ -83,7 +89,7 @@ const makeSeries = (name, form) => {
 };
 
 export const makeHighchartsConfig = (pokemonList) => {
-  let uniqueConfig = _.cloneDeep(BASE_HIGHCHARTS_CONFIG);
+  let uniqueConfig = _.cloneDeep(baseHighchartsConfig);
   let series = [];
 
   if (pokemonList) {

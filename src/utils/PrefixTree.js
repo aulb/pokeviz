@@ -23,7 +23,10 @@ const getRemainingTree = (string, tree) => {
   return node;
 };
 
-// https://medium.com/@dookpham/predictive-text-autocomplete-using-a-trie-prefix-tree-data-structure-in-javascript-part-1-6ff7fa83c74b
+/*
+ * Basic trie structure for fast auto suggestion lookup.
+ * https://medium.com/@dookpham/predictive-text-autocomplete-using-a-trie-prefix-tree-data-structure-in-javascript-part-1-6ff7fa83c74b
+ */
 class PrefixTree extends PrefixTreeNode {
   constructor() {
     super(null);

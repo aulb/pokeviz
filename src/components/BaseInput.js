@@ -32,7 +32,6 @@ class BaseInput extends Component {
   }
 
   renderSuggestionDropdown() {
-    console.log(this.state.result);
     return null;
   }
 

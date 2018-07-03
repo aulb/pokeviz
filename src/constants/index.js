@@ -1,4 +1,12 @@
-export const VALUE_TO_TIER = {
+/* A collection of 802 Pokemon competitive metadata. */
+import competitive from './competitive';
+/* Pokemon sprite and species id lookup. Lookup based on name. */
+import lookup from './lookup';
+
+/*
+ * Assign int value to a Pokemon competitive tier.
+ */
+const valueToTier = {
   1: 'PU',
   1.5: 'PUBL',
   2: 'NU',
@@ -13,7 +21,16 @@ export const VALUE_TO_TIER = {
   0: 'LC'
 };
 
-export const GENERATIONS = {
+/*
+ * Invert the key => value above to value => key.
+ * The numbers are now strings.
+ */
+const tierToValue = _.invert(valueToTier);
+
+/*
+ * Map int to main series Pokemon titles. One to seven, with partial generations in between.
+ */
+const generations = {
   1: 'RGBY',
   2: 'GSC',
   3: 'RS',
@@ -28,17 +45,30 @@ export const GENERATIONS = {
   7.5: 'USUM'
 };
 
-const GENERATIONS_LONG = {
+/*
+ * Map the main title game to Pokemon generation.
+ */
+const generationsLong = {
   'RB': 'one',
   'GS': 'two',
   'RS': 'three',
   'DP': 'four',
   'BW': 'five',
   'XY': 'six',
-  'SM': 'seven'
+  'SM': 'seven',
+  'RGBY': 'one',
+  'GSC': 'two',
+  'RSE': 'three',
+  'DPPt': 'four',
+  'B2W2': 'five',
+  'ORAS': 'six',
+  'USUM': 'seven'
 };
 
-const TIER_NAME_LONG = {
+/*
+ * Map tier name to unabbreviated tier name.
+ */
+const tierNameLong = {
   'OU': 'over used',
   'UU': 'under used',
   'RU': 'rarely used',
@@ -53,18 +83,29 @@ const TIER_NAME_LONG = {
   'LC': 'little cup'
 };
 
-function highchartsLabel() {
-  return VALUE_TO_TIER[this.value];
-}
+/*
+ * Array of 802 Pokemon names.
+ * ['Bulbasaur', 'Ivysaur', 'Venusaur', ...]
+ */
+const competitiveData = Object.keys(competitive);
 
-function highchartsTooltip() {
-  const generation = GENERATIONS_LONG[this.x];
-  const tier = TIER_NAME_LONG[VALUE_TO_TIER[this.y]];
-  return `${this.series.name} is <b>${tier}</b> in generation ${generation}`;
-}
+/*
+ * A set of valid Pokemon names.
+ * 'Pikachu' => true
+ * 'pikachu' => true (Unimplemented, currently false)
+ * 'GoroChu' => false
+ */
+const validPokemonNames = new Set(competitiveData.map(pokemonName => pokemonName));
 
-export const CATEGORIES = ['RB', 'GS', 'RS', 'DP', 'BW', 'XY', 'SM'];
-export const BASE_HIGHCHARTS_CONFIG = {
+/*
+ * Generations as categories. Generation one is RG, for red green.
+ */
+const categories = ['RB', 'GS', 'RS', 'DP', 'BW', 'XY', 'SM'];
+
+/*
+ * Base high chart configuration. Extendedable.
+ */
+const baseHighchartsConfig = {
   chart: {
     renderTo: 'container',
     type: 'line'
@@ -73,14 +114,16 @@ export const BASE_HIGHCHARTS_CONFIG = {
     text: ''
   },
   xAxis: {
-    categories: CATEGORIES,
+    categories,
   },
   yAxis: {
     title: {
       text: null
     },
     labels: {
-      formatter: highchartsLabel
+      formatter: function highchartsLabel() {
+        return valueToTier[this.value];
+      }
     }
   },
    credits: {
@@ -91,6 +134,19 @@ export const BASE_HIGHCHARTS_CONFIG = {
     borderRadius: 1,
     borderWidth: 2,
     useHTML: true,
-    formatter: highchartsTooltip
+    formatter: function() {
+      const generation = generationsLong[this.x];
+      const tier = tierNameLong[valueToTier[this.y]];
+      return `${this.series.name} is <b>${tier}</b> in generation ${generation}`;
+    }
   }
+};
+
+module.exports = {
+  competitiveData,
+  validPokemonNames,
+  categories,
+  baseHighchartsConfig,
+  generations,
+  tierToValue
 };
