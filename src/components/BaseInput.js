@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getPokemonNameSuggestions } from '../utils';
+import { getPokemonNameSuggestions } from '../utils/SuggestionLookup';
 
 class BaseInput extends Component {
   constructor() {

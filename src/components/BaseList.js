@@ -1,3 +1,7 @@
+/*
+ * __UNUSED_COMPONENT__
+ * List of Pokemon.
+ */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getSprite } from '../utils/';

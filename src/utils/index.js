@@ -1,12 +1,7 @@
 import _ from 'lodash';
-import {
-  tierToValue,
-  categories,
-  baseHighchartsConfig
-} from '../constants/';
 import lookup from '../constants/lookup';
 import competitive from '../constants/competitive';
-import PrefixTree from './PrefixTree';
+import { tierToValue, categories, baseHighchartsConfig, competitiveData, validPokemonNames, maxNumberOfPokemonSpecies } from '../constants';
 
 /*
  * Get the sprite source given Pokemon name.
@@ -25,40 +20,39 @@ export const getSprite = pokemonName => {
   return spriteSource;
 }
 
-// TODO: disabled lowercase pokemon names for now, only exact match
-const competitiveData = Object.keys(competitive);
-const validPokemonNames = new Set(competitiveData.map(pokemonName => pokemonName));
-const suggestionLookup = new PrefixTree();
-validPokemonNames.forEach(pokemonName => suggestionLookup.addWord(pokemonName.toLowerCase()));
-export const isValidPokemonName = pokemonName => {
-  return validPokemonNames.has(pokemonName);
+/*
+ * Given a Pokemon name, determine if its valid.
+ * 'Pikachu' => true
+ * 'pikachu' => true # __NOT_YET__
+ * TODO: disabled lowercase pokemon names for now, only exact match
+ */
+export const isValidPokemonName = pokemonName => validPokemonNames.has(pokemonName);
+
+/*
+ * Convert a Pokemon name into a high charts series object. All forms will be included.
+ * 'Gengar' => {'Gengar' => ..., 'Mega-Gengar': ...}
+ */
+export const getPokemonSeries = (pokemonName) => {
+  const pokemon = competitive[pokemonName];
+  return pokemon.map(form => makeSeries(pokemonName, form));
 };
 
 /*
- * Given a string, find the closest match Pokemon names.
+ * Given a tier list, return a tier that is not LC (little cup).
+ * Pikachu can exist in underused and little cup for example.
  */
-export const getPokemonNameSuggestions = string => {
-  if (!string) {
-    return [];
-  }
-
-  return suggestionLookup.predictWord(string);
-};
-
-const getPokemonSeries = (name) => {
-  const pokemon = competitive[name];
-  return pokemon.map(form => makeSeries(name, form));
-};
-
-const getHighestTier = (tiers) => {
+export const getHighestTier = (tiers) => {
   for (let i = 0; i < tiers.length; i++) {
     if (tiers[i] !== 'LC') return tiers[i];
   }
   return 'LC';
 };
 
-
-const extractFormatValues = (formats) => {
+/*
+ * Convert a generation => tiers map to array of integers and/or nulls.
+ * { XY: ['LC', 'OU'], SM: ['OU'] } => [null, null, null, null, null, 5, 5]
+ */
+export const extractFormatValues = (formats) => {
   return categories.map(generation => {
     if (!formats) {
       return null;
@@ -73,10 +67,13 @@ const extractFormatValues = (formats) => {
   }).map(tier => tier in tierToValue ? parseInt(tierToValue[tier], 10) : null);
 };
 
-const makeSeries = (name, form) => {
+/*
+ * Make a high chart series corresponding to a Pokemon's name and form.
+ */
+export const makeSeries = (pokemonName, form) => {
   const { suffix, formats } = form;
   const dash = suffix === '' ? '' : '-';
-  const fullPokemonName = `${name}${dash}${suffix}`;
+  const fullPokemonName = `${pokemonName}${dash}${suffix}`;
   const spriteName = getSprite(fullPokemonName);
   return {
     name: fullPokemonName,
@@ -88,6 +85,9 @@ const makeSeries = (name, form) => {
   }
 };
 
+/*
+ * Make the high charts configuration object given a list of Pokemon names.
+ */
 export const makeHighchartsConfig = (pokemonList) => {
   let uniqueConfig = _.cloneDeep(baseHighchartsConfig);
   let series = [];
@@ -106,9 +106,15 @@ export const makeHighchartsConfig = (pokemonList) => {
   return uniqueConfig;
 };
 
+/*
+ * Get a random Pokemon's competitive data.
+ */
 export const getRandomPokemonName = () => {
-  const randomBetween1to802 = Math.floor(Math.random() * 802);
-  return competitiveData[randomBetween1to802];
+  const randomIntBetween = Math.floor(Math.random() * maxNumberOfPokemonSpecies);
+  return competitiveData[randomIntBetween];
 };
 
+/*
+ * Get a corresponding color given a primary and secondary Pokemon types.
+ */
 export const getLineColor = (primaryType, secondaryType) => null;

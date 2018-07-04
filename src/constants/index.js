@@ -1,12 +1,11 @@
+import _ from 'lodash';
 /* A collection of 802 Pokemon competitive metadata. */
 import competitive from './competitive';
-/* Pokemon sprite and species id lookup. Lookup based on name. */
-import lookup from './lookup';
 
 /*
  * Assign int value to a Pokemon competitive tier.
  */
-const valueToTier = {
+export const valueToTier = {
   1: 'PU',
   1.5: 'PUBL',
   2: 'NU',
@@ -25,12 +24,12 @@ const valueToTier = {
  * Invert the key => value above to value => key.
  * The numbers are now strings.
  */
-const tierToValue = _.invert(valueToTier);
+export const tierToValue = _.invert(valueToTier);
 
 /*
  * Map int to main series Pokemon titles. One to seven, with partial generations in between.
  */
-const generations = {
+export const generations = {
   1: 'RGBY',
   2: 'GSC',
   3: 'RS',
@@ -48,7 +47,7 @@ const generations = {
 /*
  * Map the main title game to Pokemon generation.
  */
-const generationsLong = {
+export const generationsLong = {
   'RB': 'one',
   'GS': 'two',
   'RS': 'three',
@@ -68,7 +67,7 @@ const generationsLong = {
 /*
  * Map tier name to unabbreviated tier name.
  */
-const tierNameLong = {
+export const tierNameLong = {
   'OU': 'over used',
   'UU': 'under used',
   'RU': 'rarely used',
@@ -87,7 +86,7 @@ const tierNameLong = {
  * Array of 802 Pokemon names.
  * ['Bulbasaur', 'Ivysaur', 'Venusaur', ...]
  */
-const competitiveData = Object.keys(competitive);
+export const competitiveData = Object.keys(competitive);
 
 /*
  * A set of valid Pokemon names.
@@ -95,17 +94,17 @@ const competitiveData = Object.keys(competitive);
  * 'pikachu' => true (Unimplemented, currently false)
  * 'GoroChu' => false
  */
-const validPokemonNames = new Set(competitiveData.map(pokemonName => pokemonName));
+export const validPokemonNames = new Set(competitiveData.map(pokemonName => pokemonName));
 
 /*
  * Generations as categories. Generation one is RG, for red green.
  */
-const categories = ['RB', 'GS', 'RS', 'DP', 'BW', 'XY', 'SM'];
+export const categories = ['RB', 'GS', 'RS', 'DP', 'BW', 'XY', 'SM'];
 
 /*
  * Base high chart configuration. Extendedable.
  */
-const baseHighchartsConfig = {
+export const baseHighchartsConfig = {
   chart: {
     renderTo: 'container',
     type: 'line'
@@ -142,11 +141,7 @@ const baseHighchartsConfig = {
   }
 };
 
-module.exports = {
-  competitiveData,
-  validPokemonNames,
-  categories,
-  baseHighchartsConfig,
-  generations,
-  tierToValue
-};
+/*
+ * The total amount of Pokemon species, as of Zeraora's reveal.
+ */
+export const maxNumberOfPokemonSpecies = 807;
