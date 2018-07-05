@@ -15,6 +15,7 @@ class BaseInput extends Component {
   }
 
   onChange() {
+    console.log(getPokemonNameSuggestions(this.input.value));
     this.setState({
       query: this.input.value,
       result: getPokemonNameSuggestions(this.input.value)

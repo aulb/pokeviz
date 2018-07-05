@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import lookup from '../constants/lookup';
 import competitive from '../constants/competitive';
-import { tierToValue, categories, baseHighchartsConfig, competitiveData, validPokemonNames, maxNumberOfPokemonSpecies } from '../constants';
+import { tierToValue, categories, baseHighchartsConfig, allPokemonNamesList, allPokemonNamesSet, maxNumberOfPokemonSpecies } from '../constants';
 
 /*
  * Get the sprite source given Pokemon name.
@@ -18,7 +18,7 @@ export const getSprite = pokemonName => {
   // https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#using-the-public-folder
   const spriteSource = `${process.env.PUBLIC_URL}/assets/sprites/${sprite}.png`;
   return spriteSource;
-}
+};
 
 /*
  * Given a Pokemon name, determine if its valid.
@@ -26,7 +26,7 @@ export const getSprite = pokemonName => {
  * 'pikachu' => true # __NOT_YET__
  * TODO: disabled lowercase pokemon names for now, only exact match
  */
-export const isValidPokemonName = pokemonName => validPokemonNames.has(pokemonName);
+export const isValidPokemonName = pokemonName => allPokemonNamesSet.has(pokemonName);
 
 /*
  * Convert a Pokemon name into a high charts series object. All forms will be included.
@@ -82,7 +82,7 @@ export const makeSeries = (pokemonName, form) => {
       symbol: `url(${spriteName})`
     }
     // TODO color: '#FF00FF'
-  }
+  };
 };
 
 /*
@@ -111,10 +111,15 @@ export const makeHighchartsConfig = (pokemonList) => {
  */
 export const getRandomPokemonName = () => {
   const randomIntBetween = Math.floor(Math.random() * maxNumberOfPokemonSpecies);
-  return competitiveData[randomIntBetween];
+  return allPokemonNamesList[randomIntBetween];
 };
 
 /*
  * Get a corresponding color given a primary and secondary Pokemon types.
  */
 export const getLineColor = (primaryType, secondaryType) => null;
+
+/*
+ * Compares two *not special* strings in lowercase.
+ */
+export const compareStrings = (stringA, stringB) => stringA.toUpperCase() === stringB.toUpperCase();

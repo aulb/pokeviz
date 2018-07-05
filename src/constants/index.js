@@ -1,6 +1,6 @@
 import _ from 'lodash';
 /* A collection of 802 Pokemon competitive metadata. */
-import competitive from './competitive';
+import competitivePokemonMetadata from './competitive';
 
 /*
  * Assign int value to a Pokemon competitive tier.
@@ -83,10 +83,10 @@ export const tierNameLong = {
 };
 
 /*
- * Array of 802 Pokemon names.
+ * Array of all Pokemon names.
  * ['Bulbasaur', 'Ivysaur', 'Venusaur', ...]
  */
-export const competitiveData = Object.keys(competitive);
+export const allPokemonNamesList = Object.keys(competitivePokemonMetadata);
 
 /*
  * A set of valid Pokemon names.
@@ -94,7 +94,7 @@ export const competitiveData = Object.keys(competitive);
  * 'pikachu' => true (Unimplemented, currently false)
  * 'GoroChu' => false
  */
-export const validPokemonNames = new Set(competitiveData.map(pokemonName => pokemonName));
+export const allPokemonNamesSet = new Set(allPokemonNamesList.map(pokemonName => pokemonName));
 
 /*
  * Generations as categories. Generation one is RG, for red green.

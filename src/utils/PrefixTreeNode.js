@@ -1,3 +1,4 @@
+/* Simple trie node */
 class PrefixTreeNode {
   constructor(value) {
     this.children = {};
