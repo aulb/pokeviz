@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import lookup from '../constants/lookup';
 import competitive from '../constants/competitive';
-import { tierToValue, categories, baseHighchartsConfig, allPokemonNamesList, allPokemonNamesSet, maxNumberOfPokemonSpecies } from '../constants';
+import { pokemonNameOutlier, tierToValue, categories, baseHighchartsConfig, allPokemonNamesList, allPokemonNamesSet, maxNumberOfPokemonSpecies } from '../constants';
 
 /*
  * Get the sprite source given Pokemon name.
- * 'Pikachu' => '/usr/Pokevis/025.png'
+ * 'Pikachu' => '/usr/.../Pokevis/025.png'
  */
 export const getSprite = pokemonName => {
   const _pokemonName = pokemonName.toLowerCase();
@@ -26,7 +26,11 @@ export const getSprite = pokemonName => {
  * 'pikachu' => true # __NOT_YET__
  * TODO: disabled lowercase pokemon names for now, only exact match
  */
-export const isValidPokemonName = pokemonName => allPokemonNamesSet.has(pokemonName);
+export const isValidPokemonName = pokemonName => {
+  const sanitizedName = transformPokemonNameToProperCase(pokemonName);
+  console.log(sanitizedName, pokemonName, allPokemonNamesSet.has(sanitizedName));
+  return allPokemonNamesSet.has(sanitizedName);
+};
 
 /*
  * Convert a Pokemon name into a high charts series object. All forms will be included.
@@ -123,3 +127,58 @@ export const getLineColor = (primaryType, secondaryType) => null;
  * Compares two *not special* strings in lowercase.
  */
 export const compareStrings = (stringA, stringB) => stringA.toUpperCase() === stringB.toUpperCase();
+
+/*
+ * String "title" method from Python.
+ */
+export const pokemonNameTitle = string => {
+  // Only one dash assumption
+  const includesQuote = string.includes('\'');
+  const includesDash = string.includes('-');
+
+  // TODO: Redo these temporary fixes
+  let _string = _.startCase(string);
+  if (includesQuote) {
+    const indexOfQuote = string.indexOf('\'');
+    _string = replaceStringAt(_string, indexOfQuote,  '\'');
+  }
+
+  if (includesDash) {
+    const indexOfDash = string.indexOf('-');
+    _string = replaceStringAt(_string, indexOfDash, '-');
+  }
+
+  return _string;
+};
+
+/*
+ * Insert/Replace new string at position index.
+ */
+export const replaceStringAt = (string, index, replacement) => {
+  return `${string.substr(0, index)}${replacement}${string.substr(index + replacement.length)}`;
+};
+
+export const insertStringAt = (string, index, insertion) => {
+  return `${string.substr(0, index)}${insertion}${string.substr(index + 1)}`;
+};
+
+/*
+ * Transform a Pokemon name to its proper case.
+ */
+export const transformPokemonNameToProperCase = pokemonName => {
+  // TODO: Hijack remove this hack
+  const _pokemonName = pokemonName.toLowerCase();
+  if (pokemonNameOutlier[_pokemonName]) {
+    return pokemonNameOutlier[_pokemonName];
+  }
+
+  return pokemonNameTitle(_pokemonName);
+}
+
+/*
+ * Transform lowercase Pokemon names into its proper case.
+ * Avoid using filter for the time being and changing the data.
+ */
+export const transformPokemonNamesToProperCase = pokemonNames => {
+  return pokemonNames.map(pokemonName => transformPokemonNameToProperCase(pokemonName));
+};

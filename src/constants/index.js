@@ -145,3 +145,22 @@ export const baseHighchartsConfig = {
  * The total amount of Pokemon species, as of Zeraora's reveal.
  */
 export const maxNumberOfPokemonSpecies = 807;
+
+
+/*
+ * Outlier names.
+ */
+export const pokemonNameOutlier = {
+  'kommo-o': 'Kommo-o',
+  'hakomo-o': 'Hakomo-o', 
+  'jangmo-o': 'Jangmo-o',
+  'kommoo': 'Kommo-o',
+  'hakamoo': 'Hakamo-o',
+  'jangmoo': 'Jangmo-o',
+  'farfetchd': 'Farfetch\'d',
+  'farfetch\'d': 'Farfetch\'d',
+  'mr mime': 'Mr. Mime',
+  'mime jr': 'Mime Jr.',
+  'mr. mime': 'Mr. Mime',
+  'mime jr.': 'Mime Jr.'
+};

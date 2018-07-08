@@ -25,6 +25,7 @@ class BaseContainer extends Component {
   addPokemon(pokemonName) {
     const { addToPokemonList } = this.props;
     if (isValidPokemonName(pokemonName)) {
+      console.log(pokemonName)
       addToPokemonList(pokemonName);
     }
     this.setNewPokemon();

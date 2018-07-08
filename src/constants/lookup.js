@@ -409,7 +409,7 @@ export default {
   "id": "82",
   "sprite": "082"
  },
- "farfetchd": {
+ "farfetch'd": {
   "speciesId": "83",
   "id": "83",
   "sprite": "083"
@@ -604,7 +604,7 @@ export default {
   "id": "121",
   "sprite": "121"
  },
- "mr-mime": {
+ "mr. mime": {
   "speciesId": "122",
   "id": "122",
   "sprite": "122"
@@ -1924,6 +1924,11 @@ export default {
   "id": "385",
   "sprite": "385"
  },
+ "deoxys": {
+  "speciesId": "386",
+  "id": "386",
+  "sprite": "386"
+ },
  "deoxys-normal": {
   "speciesId": "386",
   "id": "386",
@@ -2189,7 +2194,7 @@ export default {
   "id": "438",
   "sprite": "438"
  },
- "mime-jr": {
+ "mime jr.": {
   "speciesId": "439",
   "id": "439",
   "sprite": "439"
@@ -2458,6 +2463,11 @@ export default {
   "speciesId": "491",
   "id": "491",
   "sprite": "491"
+ },
+ "shaymin": {
+  "speciesId": "492",
+  "id": "492",
+  "sprite": "492"
  },
  "shaymin-land": {
   "speciesId": "492",
@@ -2749,6 +2759,11 @@ export default {
   "id": "549",
   "sprite": "549"
  },
+ "basculin": {
+  "speciesId": "550",
+  "id": "550",
+  "sprite": "550"
+ },
  "basculin-red-striped": {
   "speciesId": "550",
   "id": "550",
@@ -2773,6 +2788,11 @@ export default {
   "speciesId": "554",
   "id": "554",
   "sprite": "554"
+ },
+ "darmanitan": {
+  "speciesId": "555",
+  "id": "555",
+  "sprite": "555"
  },
  "darmanitan-standard": {
   "speciesId": "555",
@@ -3554,6 +3574,16 @@ export default {
   "id": "709",
   "sprite": "709"
  },
+ "pumpkaboo": {
+  "speciesId": "710",
+  "id": "710",
+  "sprite": "710"
+ },
+ "gourgeist": {
+  "speciesId": "711",
+  "id": "711",
+  "sprite": "711"
+ },
  "pumpkaboo-average": {
   "speciesId": "710",
   "id": "710",
@@ -3709,6 +3739,11 @@ export default {
   "id": "740",
   "sprite": "740"
  },
+ "oricorio": {
+  "speciesId": "741",
+  "id": "741",
+  "sprite": "741"
+ },
  "oricorio-baile": {
   "speciesId": "741",
   "id": "741",
@@ -3729,10 +3764,20 @@ export default {
   "id": "744",
   "sprite": "744"
  },
- "lycanrock-day": {
+ "lycanroc": {
   "speciesId": "745",
   "id": "745",
   "sprite": "745"
+ },
+ "lycanroc-day": {
+  "speciesId": "745",
+  "id": "745",
+  "sprite": "745"
+ },
+ "wishiwashi": {
+  "speciesId": "746",
+  "id": "746",
+  "sprite": "746"
  },
  "wishiwashi-solo": {
   "speciesId": "746",
@@ -4499,7 +4544,7 @@ export default {
   "id": "10091",
   "sprite": "741-p"
  },
- "oricorio-pa''u": {
+ "oricorio-pa'u": {
   "speciesId": "741",
   "id": "10092",
   "sprite": "741-pau"
@@ -4509,10 +4554,15 @@ export default {
   "id": "10093",
   "sprite": "741-s"
  },
- "lycanrock-night": {
+ "lycanroc-midnight": {
   "speciesId": "745",
   "id": "10094",
   "sprite": "745-m"
+ },
+ "lycanroc-dusk": {
+  "speciesId": "745",
+  "id": "10094",
+  "sprite": "745-d"
  },
  "wishiwashi-school": {
   "speciesId": "746",
