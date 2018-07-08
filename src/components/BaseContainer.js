@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SearchRow from './SearchRow';
 import GraphRow from './GraphRow';
 import Header from './Header';
-import { makeHighchartsConfig, isValidPokemonName } from '../utils/';
+import { makeHighchartsConfig, isValidPokemonName, transformPokemonNameToProperCase } from '../utils/';
 
 class BaseContainer extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class BaseContainer extends Component {
   addPokemon(pokemonName) {
     const { addToPokemonList } = this.props;
     if (isValidPokemonName(pokemonName)) {
-      addToPokemonList(pokemonName);
+      addToPokemonList(transformPokemonNameToProperCase(pokemonName));
     }
     this.setNewPokemon();
   }
