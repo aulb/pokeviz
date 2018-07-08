@@ -28,7 +28,6 @@ export const getSprite = pokemonName => {
  */
 export const isValidPokemonName = pokemonName => {
   const sanitizedName = transformPokemonNameToProperCase(pokemonName);
-  console.log(sanitizedName, pokemonName, allPokemonNamesSet.has(sanitizedName));
   return allPokemonNamesSet.has(sanitizedName);
 };
 
